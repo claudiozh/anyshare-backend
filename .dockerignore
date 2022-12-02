@@ -1,0 +1,6 @@
+dockerignore
+node_modules
+deploy/release
+dist
+.git
+.husky

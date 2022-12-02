@@ -1,0 +1,35 @@
+version: '3.3'
+
+services:
+  anyshare-api:
+    build: .
+    container_name: anyshare-api
+    networks:
+      - anyshare-network
+    user: node
+    env_file:
+      - .env
+    volumes:
+      - ./:/home/node/app
+    ports:
+      - "9229:9229"
+      - "3000:3000"
+      - "5555:5555"
+
+  anyshare-database:
+      image: postgres:14.2-alpine
+      container_name: anyshare-database
+      volumes:
+        - db-data:/var/lib/postgresql/data
+      env_file:
+        - .env
+      ports:
+        - "5432:5432"
+      networks:
+        - anyshare-network
+
+volumes:
+  db-data:
+
+networks: 
+  anyshare-network:

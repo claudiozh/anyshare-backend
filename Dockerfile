@@ -1,0 +1,12 @@
+FROM node:16.17.1-alpine
+
+WORKDIR /home/node/app
+
+ENV NODE_ENV development
+ENV TZ America/Fortaleza
+
+RUN npm install -g @nestjs/cli
+RUN apk add --no-cache tzdata
+
+CMD [ "npm", "run", "start:dev" ]
+
