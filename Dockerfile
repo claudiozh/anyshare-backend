@@ -7,6 +7,7 @@ ENV TZ America/Fortaleza
 
 RUN npm install -g @nestjs/cli
 RUN apk add --no-cache tzdata
+RUN npx prisma generate
 
 CMD [ "npm", "run", "start:dev" ]
 
