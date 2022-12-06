@@ -27,7 +27,7 @@ FROM node:16.17.1-alpine
 ENV NODE_ENV production
 ENV TZ America/Fortaleza
 
-USER node
+USER root
 WORKDIR /home/node/app
 
 # Copy the Pre-built binary file from the previous stage

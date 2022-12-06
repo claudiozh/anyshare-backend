@@ -43,7 +43,7 @@ export class EventsGateway {
       const contentDB = await this.contentService.findContentByPath(room);
 
       this.server.in(room).emit('content', {
-        content: contentDB.content,
+        content: contentDB?.content || '',
       });
     } catch (error) {
       this.logger.error(error);
