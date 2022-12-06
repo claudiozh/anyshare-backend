@@ -39,15 +39,20 @@ export class EventsGateway {
       this.server.in(room).emit('room-created', {
         room,
       });
-
-      const contentDB = await this.contentService.findContentByPath(room);
-
-      this.server.in(room).emit('content', {
-        content: contentDB?.content || '',
-      });
     } catch (error) {
       this.logger.error(error);
     }
+  }
+
+  @SubscribeMessage('find-content')
+  async findContent(
+    @MessageBody() data: { room: string },
+  ): Promise<{ content: string }> {
+    const contentDB = await this.contentService.findContentByPath(data?.room);
+
+    return {
+      content: contentDB?.content,
+    };
   }
 
   @SubscribeMessage('save-content')
