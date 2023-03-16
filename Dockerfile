@@ -39,5 +39,5 @@ COPY --from=builder /home/node/app/node_modules/ /home/node/app/node_modules/
 # RUN apk add --no-cache ca-certificates tzdata
 
 # Command to run the executable
-CMD [ "node", "dist/main" , "npx prisma generate", "npx prisma migrate deploy"]
+CMD ["npx prisma migrate deploy", "node", "dist/main" ]
 
