@@ -19,7 +19,7 @@ WORKDIR /home/node/app
 
 COPY . .
 RUN npm ci && npm run build && npm prune --production
-RUN npx prisma deploy
+RUN npx prisma migrate deploy
 
 ######## Start a new stage from scratch ####### 
 FROM node:16.17.1-alpine
