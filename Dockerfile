@@ -19,6 +19,7 @@ WORKDIR /home/node/app
 
 COPY . .
 RUN npm ci && npm run build && npm prune --production
+RUN npx prisma deploy
 
 ######## Start a new stage from scratch ####### 
 FROM node:16.17.1-alpine
@@ -39,5 +40,5 @@ COPY --from=builder /home/node/app/node_modules/ /home/node/app/node_modules/
 # RUN apk add --no-cache ca-certificates tzdata
 
 # Command to run the executable
-CMD ["npx prisma migrate deploy",  "node", "dist/main" ]
+CMD ["node", "dist/main" ]
 
