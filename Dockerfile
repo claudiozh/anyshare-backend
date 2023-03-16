@@ -35,7 +35,8 @@ COPY --from=builder /home/node/app/package.json .
 COPY --from=builder /home/node/app/package-lock.json .
 COPY --from=builder /home/node/app/node_modules/ /home/node/app/node_modules/
 
-RUN apk add --no-cache ca-certificates tzdata
+RUN apk add --no-cache
+# RUN apk add --no-cache ca-certificates tzdata
 
 # Command to run the executable
 CMD [ "node", "dist/main" ]
