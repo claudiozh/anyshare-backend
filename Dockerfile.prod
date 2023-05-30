@@ -5,6 +5,7 @@ ENV NODE_ENV build
 WORKDIR /home/node/app
 
 COPY . .
+RUN npx prisma generate
 RUN npm ci && npm run build && npm prune --production
 
 ######## Start a new stage from scratch #######
@@ -24,7 +25,6 @@ COPY --from=builder /home/node/app/package-lock.json .
 COPY --from=builder /home/node/app/node_modules/ /home/node/app/node_modules/
 
 RUN apk add --no-cache ca-certificates tzdata
-RUN npx prisma generate
 RUN npx prisma migrate deploy
 
 USER node
